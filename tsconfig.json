@@ -12,7 +12,7 @@
       "dom",
       "scripthost"
     ],
-    "moduleResolution": "classic",
+    "moduleResolution": "node",
     "importHelpers": true,
     "baseUrl": "./",
     "paths": {

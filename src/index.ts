@@ -1,3 +1,5 @@
+import { isOldEdge, isSafari } from "./utils/agent";
+
 /**
  * @ignore
  */
@@ -233,8 +235,8 @@ export default class AudioTrackMixer {
    * const tracks = mixer.getTracks();
    * ```
    */
-  getTracks(): Array<MediaStreamTrack> {
-    const tracks: Array<MediaStreamTrack> = [];
+  getTracks(): MediaStreamTrack[] {
+    const tracks: MediaStreamTrack[] = [];
     this.caches.forEach(function (cache: TrackCache) {
       tracks.push(cache.track);
     });
@@ -319,8 +321,33 @@ export default class AudioTrackMixer {
    * const audioTracks = AudioTrackMixer.getTracks(stream);
    * ```
    */
-  static getTracks(stream: MediaStream): Array<MediaStreamTrack> {
+  static getTracks(stream: MediaStream): MediaStreamTrack[] {
     return stream.getAudioTracks();
+  }
+
+  /**
+   * Get audio tracks from and audio element.
+   * note: audio element must has already loaded data;
+   *
+   * @param audio - An audio element (HTMLAudioElement)
+   * @returns
+   * @example
+   * ```
+   * const audio = new Audio(xxx.mp3);
+   * audio.addEventListener('loadeddata', () => {
+   *   const audioTracks = AudioTrackMixer.getTracksFromAudioElement(audio);
+   * });
+   * ```
+   */
+  static getTracksFromAudioElement(audio: HTMLAudioElement): MediaStreamTrack[] {
+    if (Audio.prototype.captureStream) {
+      return (audio as any).captureStream().getAudioTracks();
+    } else if (Audio.prototype.mozCaptureStream) {
+      return (audio as any).mozCaptureStream().getAudioTracks()[0];
+    } else if (isSafari() || isOldEdge()) {
+      return (audio as any).audioTracks;
+    }
+    return [];
   }
 }
 
