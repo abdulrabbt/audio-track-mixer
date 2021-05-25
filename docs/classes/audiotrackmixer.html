@@ -70,7 +70,7 @@
 				<div class="tsd-comment tsd-typography">
 					<dl class="tsd-comment-tags">
 						<dt>example</dt>
-						<dd><pre><code><span class="hljs-keyword">import</span> AudioTrackMixer <span class="hljs-keyword">from</span> <span class="hljs-string">'audio-track-mixer'</span>;</code></pre></dd>
+						<dd><pre><code><span class="hljs-keyword">import</span> AudioTrackMixer <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;audio-track-mixer&#x27;</span>;</code></pre></dd>
 					</dl>
 				</div>
 			</section>
@@ -106,6 +106,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="audiotrackmixer.html#settrackvolume" class="tsd-kind-icon">set<wbr>Track<wbr>Volume</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="audiotrackmixer.html#unmutetrack" class="tsd-kind-icon">unmute<wbr>Track</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="audiotrackmixer.html#gettracks-1" class="tsd-kind-icon">get<wbr>Tracks</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="audiotrackmixer.html#gettracksfromaudioelement" class="tsd-kind-icon">get<wbr>Tracks<wbr>From<wbr>Audio<wbr>Element</a></li>
 							</ul>
 						</section>
 					</div>
@@ -125,18 +126,18 @@
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>The constructor function</p>
+									<p>Create an audio track mixer / 创建一个音轨合并器</p>
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>throws</dt>
-									<dd><p>Will throw an error if the environment does not support to mix audio track</p>
+									<dd><p>Throw an error if the browser does not support to mix audio track / 如果浏览器不支持音轨合并，将抛出错误</p>
 									</dd>
 									<dt>example</dt>
 									<dd><pre><code><span class="hljs-keyword">const</span> mixer = <span class="hljs-keyword">new</span> AudioTrackMixer();</code></pre></dd>
 								</dl>
 							</div>
 							<h4 class="tsd-returns-title">Returns <a href="audiotrackmixer.html" class="tsd-signature-type">AudioTrackMixer</a></h4>
-							<p>An AudioTrackMixer object</p>
+							<p>An audio track mixer / 一个音轨合并器</p>
 						</li>
 					</ul>
 				</section>
@@ -155,19 +156,17 @@
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Add an audio track (<a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrack">MediaStreamTrack</a>) into the mixer</p>
+									<p>Add an audio track (<a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrack">MediaStreamTrack</a>) into the mixer. / 向合并器添加一个音轨 (<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/MediaStreamTrack">音轨</a>)</p>
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>throws</dt>
-									<dd><p>Will throw an error if the track is not an audio kind MediaStreamTrack</p>
-									</dd>
-									<dt>throws</dt>
-									<dd><p>Will throw an error if the track has already been added into the mixer</p>
+									<dd><p>Throw an error if the track is not an audio kind MediaStreamTrack or it has already been added. / 添加的非合法音轨或已添加过该音轨时将抛出错误</p>
 									</dd>
 									<dt>example</dt>
 									<dd><pre><code>mixer.add<span class="hljs-constructor">Track(<span class="hljs-params">trackA</span>)</span>;
-mixer.add<span class="hljs-constructor">Track(<span class="hljs-params">trackB</span>)</span>;</code></pre><p><strong>Note</strong></p>
-										<p>It&#39;s also a chain function, so you can also use it just like:</p>
+mixer.add<span class="hljs-constructor">Track(<span class="hljs-params">trackB</span>)</span>;</code></pre></dd>
+									<dt>note</dt>
+									<dd><p>Because of the chain invoke, you can also use it just like the following way: / 因支持链接调用，所以你也可以像下面这样使用:</p>
 									<pre><code>mixer.add<span class="hljs-constructor">Track(<span class="hljs-params">trackA</span>)</span>.add<span class="hljs-constructor">Track(<span class="hljs-params">trackB</span>)</span>;</code></pre></dd>
 								</dl>
 							</div>
@@ -176,12 +175,12 @@ mixer.add<span class="hljs-constructor">Track(<span class="hljs-params">trackB</
 								<li>
 									<h5>track: <span class="tsd-signature-type">MediaStreamTrack</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>An audio track</p>
+										<p>An audio track / 一个音轨</p>
 									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="audiotrackmixer.html" class="tsd-signature-type">AudioTrackMixer</a></h4>
-							<p>The method will return the mixer itself to support the chain invoke.</p>
+							<p>Return the mixer itself, so it support the chain invoke. / 返回音轨合并器本身以支持链式调用</p>
 						</li>
 					</ul>
 				</section>
@@ -197,7 +196,7 @@ mixer.add<span class="hljs-constructor">Track(<span class="hljs-params">trackB</
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Clear cache of the mixer and destroy it.</p>
+									<p>Clear cache of the mixer and destroy it. / 销毁合并器</p>
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>example</dt>
@@ -225,15 +224,16 @@ mixer.add<span class="hljs-constructor">Track(<span class="hljs-params">trackB</
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get media stream which contains mixed audio track</p>
+									<p>Get media stream which contains mixed audio track, you can play it directly. / 直接获取包含合并后音轨的媒体流，可用于直接播放</p>
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>example</dt>
-									<dd><pre><code><span class="hljs-attr">audio.srcObject</span> = mixer.getMixedMediaStream()<span class="hljs-comment">; // audio is an Audio object</span></code></pre></dd>
+									<dd><pre><code><span class="hljs-keyword">const</span> audio = <span class="hljs-keyword">new</span> <span class="hljs-built_in"><span class="hljs-built_in">Audio</span></span>();
+audio.srcObject = mixer.<span class="hljs-built_in">getMixedMediaStream</span>();</code></pre></dd>
 								</dl>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MediaStream</span></h4>
-							<p>The media stream includes the mixed audio track, you can play it directly</p>
+							<p>The media stream includes the mixed audio track / 返回媒体流</p>
 						</li>
 					</ul>
 				</section>
@@ -249,7 +249,7 @@ mixer.add<span class="hljs-constructor">Track(<span class="hljs-params">trackB</
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get the mixed track from the mixer after adding tracks.</p>
+									<p>Get the mixed track from the mixer after mixing tracks. / 获取经过合并器合并后的音轨</p>
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>example</dt>
@@ -257,7 +257,7 @@ mixer.add<span class="hljs-constructor">Track(<span class="hljs-params">trackB</
 								</dl>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MediaStreamTrack</span></h4>
-							<p>The mixed audio track</p>
+							<p>The mixed audio track / 合并后的音轨</p>
 						</li>
 					</ul>
 				</section>
@@ -273,15 +273,15 @@ mixer.add<span class="hljs-constructor">Track(<span class="hljs-params">trackB</
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get the volume of the mixed track</p>
+									<p>Get the volume of the mixed track. / 获取合并后音轨的音量</p>
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>example</dt>
-									<dd><pre><code>const <span class="hljs-keyword">volume</span><span class="bash"> = mixer.getMixedTrackVolume();</span></code></pre></dd>
+									<dd><pre><code>const volume = mixer.getMixedTrackVolume()<span class="hljs-comment">;</span></code></pre></dd>
 								</dl>
 							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-							<p>Volume range [0, 100]</p>
+							<p>Volume range [0, 100] / 返回的音量范围为 [0, 100]</p>
 						</li>
 					</ul>
 				</section>
@@ -289,7 +289,7 @@ mixer.add<span class="hljs-constructor">Track(<span class="hljs-params">trackB</
 					<a name="gettracks" class="tsd-anchor"></a>
 					<h3>get<wbr>Tracks</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Tracks<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">MediaStreamTrack</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Tracks<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MediaStreamTrack</span><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -297,15 +297,15 @@ mixer.add<span class="hljs-constructor">Track(<span class="hljs-params">trackB</
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Get all tracks added into the mixer. (not the mixed one).</p>
+									<p>Get all original tracksr (not the mixed one). / 获取所有原始音轨</p>
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>example</dt>
 									<dd><pre><code>const tracks = mixer.getTracks()<span class="hljs-comment">;</span></code></pre></dd>
 								</dl>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">MediaStreamTrack</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p>All tracks added into the mixer</p>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MediaStreamTrack</span><span class="tsd-signature-symbol">[]</span></h4>
+							<p>Return all original tracks / 返回所有原始音轨</p>
 						</li>
 					</ul>
 				</section>
@@ -321,11 +321,11 @@ mixer.add<span class="hljs-constructor">Track(<span class="hljs-params">trackB</
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Mute the track added into the mixer</p>
+									<p>Mute a track. / 将某条音轨静音</p>
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>throws</dt>
-									<dd><p>Will throw an error if the track is not an audio kind MediaStreamTrack</p>
+									<dd><p>Throw an error if the track is not an audio kind MediaStreamTrack / 传入的非合法音轨时将抛出错误</p>
 									</dd>
 									<dt>example</dt>
 									<dd><pre><code><span class="hljs-keyword">const</span> <span class="hljs-literal">result</span> = mixer.muteTrack(trackA);</code></pre></dd>
@@ -336,12 +336,12 @@ mixer.add<span class="hljs-constructor">Track(<span class="hljs-params">trackB</
 								<li>
 									<h5>track: <span class="tsd-signature-type">MediaStreamTrack</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The track added into the mixer</p>
+										<p>The track added into the mixer / 指定音轨</p>
 									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-							<p>True if mute successfully, False when failure</p>
+							<p>True if mute successfully, False when failure / 成功时返回 true，失败时返回 false</p>
 						</li>
 					</ul>
 				</section>
@@ -357,16 +357,17 @@ mixer.add<span class="hljs-constructor">Track(<span class="hljs-params">trackB</
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Remove an audio track from the mixer</p>
+									<p>Remove an audio track from the mixer. / 将某条音轨从合并器中移除</p>
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>throws</dt>
-									<dd><p>Will throw an error if the track is not an audio kind MediaStreamTrack</p>
+									<dd><p>Throw an error if the track is not an audio kind MediaStreamTrack. / 传入非合法音轨时将抛出错误</p>
 									</dd>
 									<dt>example</dt>
 									<dd><pre><code>mixer.remove<span class="hljs-constructor">Track(<span class="hljs-params">trackA</span>)</span>;
-mixer.remove<span class="hljs-constructor">Track(<span class="hljs-params">trackB</span>)</span>;</code></pre><p><strong>Note</strong></p>
-										<p>It&#39;s also a chain function, so you can also use it just like:</p>
+mixer.remove<span class="hljs-constructor">Track(<span class="hljs-params">trackB</span>)</span>;</code></pre></dd>
+									<dt>note</dt>
+									<dd><p>Because of the chain invoke, you can also use it just like the following way: / 因支持链接调用，所以你也可以像下面这样使用:</p>
 									<pre><code>mixer.remove<span class="hljs-constructor">Track(<span class="hljs-params">trackA</span>)</span>.remove<span class="hljs-constructor">Track(<span class="hljs-params">trackB</span>)</span>;</code></pre></dd>
 								</dl>
 							</div>
@@ -375,12 +376,12 @@ mixer.remove<span class="hljs-constructor">Track(<span class="hljs-params">track
 								<li>
 									<h5>track: <span class="tsd-signature-type">MediaStreamTrack</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The audio track added into the mixer</p>
+										<p>The audio track added into the mixer. / 已合并的音轨</p>
 									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="audiotrackmixer.html" class="tsd-signature-type">AudioTrackMixer</a></h4>
-							<p>The method will return the mixer itself to support the chain invoke.</p>
+							<p>Return the mixer itself to support the chain invoke. / 返回合并器本身以支持链式调用</p>
 						</li>
 					</ul>
 				</section>
@@ -396,11 +397,11 @@ mixer.remove<span class="hljs-constructor">Track(<span class="hljs-params">track
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Set volume of the track added into the mixer</p>
+									<p>Set volume of the track added into the mixer. / 调节原始音轨的输出音量</p>
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>throws</dt>
-									<dd><p>Will throw an error if the track is not an audio kind MediaStreamTrack</p>
+									<dd><p>Throw an error if the track is not an audio kind MediaStreamTrack / 当输入非合法音轨时将抛出错误</p>
 									</dd>
 									<dt>example</dt>
 									<dd><pre><code>mixer.set<span class="hljs-constructor">TrackVolume(<span class="hljs-params">trackA</span>, 50)</span>;</code></pre></dd>
@@ -411,13 +412,13 @@ mixer.remove<span class="hljs-constructor">Track(<span class="hljs-params">track
 								<li>
 									<h5>track: <span class="tsd-signature-type">MediaStreamTrack</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The track added into the mixer</p>
+										<p>The track added into the mixer / 指定音轨</p>
 									</div>
 								</li>
 								<li>
 									<h5>volume: <span class="tsd-signature-type">number</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>Volume range [0, 100]</p>
+										<p>Volume range [0, 100] / 指定音量，可设范围 [0, 100]</p>
 									</div>
 								</li>
 							</ul>
@@ -437,11 +438,11 @@ mixer.remove<span class="hljs-constructor">Track(<span class="hljs-params">track
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Unmute the track added into the mixer</p>
+									<p>Unmute the track added into the mixer. / 将某条音轨取消静音</p>
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>throws</dt>
-									<dd><p>Will throw an error if the track is not an audio kind MediaStreamTrack</p>
+									<dd><p>Throw an error if the track is not an audio kind MediaStreamTrack / 传入的非合法音轨时将抛出错误</p>
 									</dd>
 									<dt>example</dt>
 									<dd><pre><code><span class="hljs-keyword">const</span> <span class="hljs-literal">result</span> = mixer.unmuteTrack(trackA);</code></pre></dd>
@@ -452,12 +453,12 @@ mixer.remove<span class="hljs-constructor">Track(<span class="hljs-params">track
 								<li>
 									<h5>track: <span class="tsd-signature-type">MediaStreamTrack</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The track added into the mixer</p>
+										<p>The track added into the mixer / 指定音轨</p>
 									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
-							<p>True if unmute successfully, False when failure</p>
+							<p>True if unmute successfully, False when failure / 成功时返回 true, 失败时返回 false</p>
 						</li>
 					</ul>
 				</section>
@@ -465,7 +466,7 @@ mixer.remove<span class="hljs-constructor">Track(<span class="hljs-params">track
 					<a name="gettracks-1" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Tracks</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Tracks<span class="tsd-signature-symbol">(</span>stream<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MediaStream</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">MediaStreamTrack</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Tracks<span class="tsd-signature-symbol">(</span>stream<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MediaStream</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MediaStreamTrack</span><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -473,7 +474,7 @@ mixer.remove<span class="hljs-constructor">Track(<span class="hljs-params">track
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Sometimes, you may have a source <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/MediaStream">MediaStream</a>, this function will extract all audio tracks from the MediaStream</p>
+									<p>Get all audio tracks from a <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaStream">MediaStream</a>. / 直接从 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/MediaStream">媒体流</a> 中提取出所有音频轨道</p>
 								</div>
 								<dl class="tsd-comment-tags">
 									<dt>example</dt>
@@ -485,12 +486,51 @@ mixer.remove<span class="hljs-constructor">Track(<span class="hljs-params">track
 								<li>
 									<h5>stream: <span class="tsd-signature-type">MediaStream</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>A source MediaStream</p>
+										<p>A source MediaStream / 一条媒体流</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">MediaStreamTrack</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<p>An Array of audio kind MediaStreamTrack</p>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MediaStreamTrack</span><span class="tsd-signature-symbol">[]</span></h4>
+							<p>An Array of audio kind MediaStreamTrack / 包含若干个音轨的数组</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="gettracksfromaudioelement" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Tracks<wbr>From<wbr>Audio<wbr>Element</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Tracks<wbr>From<wbr>Audio<wbr>Element<span class="tsd-signature-symbol">(</span>audio<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">HTMLAudioElement</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">MediaStreamTrack</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get audio tracks from an audio element. / 从 audio 元素中提取出音轨</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code>const audio = <span class="hljs-keyword">new</span> <span class="hljs-constructor">Audio(<span class="hljs-params">xxx</span>.<span class="hljs-params">mp3</span>)</span>;
+audio.add<span class="hljs-constructor">EventListener(&#x27;<span class="hljs-params">loadeddata</span>&#x27;, ()</span> =&gt; {
+  const audioTracks = <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">AudioTrackMixer</span>.</span></span>get<span class="hljs-constructor">TracksFromAudioElement(<span class="hljs-params">audio</span>)</span>;
+});</code></pre></dd>
+									<dt>note</dt>
+									<dd><p>Audio element must has already loaded data. / 提取前须确保音频数据已加载</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>audio: <span class="tsd-signature-type">HTMLAudioElement</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>An audio element (HTMLAudioElement). / 一个 audio 元素</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">MediaStreamTrack</span><span class="tsd-signature-symbol">[]</span></h4>
+							<p>Audio tracks / 若干音轨</p>
 						</li>
 					</ul>
 				</section>
@@ -547,6 +587,9 @@ mixer.remove<span class="hljs-constructor">Track(<span class="hljs-params">track
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
 								<a href="audiotrackmixer.html#gettracks-1" class="tsd-kind-icon">get<wbr>Tracks</a>
 							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="audiotrackmixer.html#gettracksfromaudioelement" class="tsd-kind-icon">get<wbr>Tracks<wbr>From<wbr>Audio<wbr>Element</a>
+							</li>
 						</ul>
 					</li>
 				</ul>
@@ -578,6 +621,5 @@ mixer.remove<span class="hljs-constructor">Track(<span class="hljs-params">track
 </div>
 <div class="overlay"></div>
 <script src="../assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>

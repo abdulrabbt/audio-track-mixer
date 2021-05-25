@@ -27,7 +27,9 @@
     "strictNullChecks": true,
     "noUnusedParameters": true,
     "removeComments": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "stripInternal": true
   },
   "include": [
     "src/**/*",
