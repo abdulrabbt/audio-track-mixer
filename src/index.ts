@@ -38,10 +38,10 @@ export default class AudioTrackMixer {
   private timeDomainData: Uint8Array
 
   /**
-   * The constructor function
+   * Create an audio track mixer / 创建一个音轨合并器
    * 
-   * @returns An AudioTrackMixer object
-   * @throws Will throw an error if the environment does not support to mix audio track
+   * @returns An audio track mixer / 一个音轨合并器
+   * @throws Throw an error if the browser does not support to mix audio track / 如果浏览器不支持音轨合并，将抛出错误
    * @example
    * ```
    * const mixer = new AudioTrackMixer();
@@ -77,21 +77,21 @@ export default class AudioTrackMixer {
   }
 
   /**
-   * Add an audio track ([MediaStreamTrack](https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrack)) into the mixer
+   * Add an audio track ([MediaStreamTrack](https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamTrack)) into the mixer. / 向合并器添加一个音轨 ([音轨](https://developer.mozilla.org/zh-CN/docs/Web/API/MediaStreamTrack))
    * 
-   * @param track - An audio track
-   * @returns The method will return the mixer itself to support the chain invoke.
-   * @throws Will throw an error if the track is not an audio kind MediaStreamTrack
-   * @throws Will throw an error if the track has already been added into the mixer
+   * @param track - An audio track / 一个音轨
+   * @returns Return the mixer itself, so it support the chain invoke. / 返回音轨合并器本身以支持链式调用
+   * @throws Throw an error if the track is not an audio kind MediaStreamTrack or it has already been added. / 添加的非合法音轨或已添加过该音轨时将抛出错误
    * @example
    * ```
    * mixer.addTrack(trackA);
    * mixer.addTrack(trackB);
    * ```
+   *
+   * **Note / 备注**
+   *
+   * Because of the chain invoke, you can also use it just like the following way: / 因支持链接调用，所以你也可以像下面这样使用:
    * 
-   * **Note**
-   * 
-   * It's also a chain function, so you can also use it just like:
    * 
    * ```
    * mixer.addTrack(trackA).addTrack(trackB);
@@ -122,20 +122,20 @@ export default class AudioTrackMixer {
   }
 
   /**
-   * Remove an audio track from the mixer
+   * Remove an audio track from the mixer. / 将某条音轨从合并器中移除
    * 
-   * @param track - The audio track added into the mixer
-   * @returns The method will return the mixer itself to support the chain invoke.
-   * @throws Will throw an error if the track is not an audio kind MediaStreamTrack
+   * @param track - The audio track added into the mixer. / 已合并的音轨
+   * @returns Return the mixer itself to support the chain invoke. / 返回合并器本身以支持链式调用
+   * @throws Throw an error if the track is not an audio kind MediaStreamTrack. / 传入非合法音轨时将抛出错误
    * @example
    * ```
    * mixer.removeTrack(trackA);
    * mixer.removeTrack(trackB);
    * ```
-   * 
-   * **Note**
-   * 
-   * It's also a chain function, so you can also use it just like:
+   *
+   * **Note / 备注**
+   *
+   * Because of the chain invoke, you can also use it just like the following way: / 因支持链接调用，所以你也可以像下面这样使用:
    * 
    * ```
    * mixer.removeTrack(trackA).removeTrack(trackB);
@@ -156,11 +156,11 @@ export default class AudioTrackMixer {
   }
 
   /**
-   * Set volume of the track added into the mixer
+   * Set volume of the track added into the mixer. / 调节原始音轨的输出音量
    * 
-   * @param track - The track added into the mixer
-   * @param volume - Volume range [0, 100]
-   * @throws Will throw an error if the track is not an audio kind MediaStreamTrack
+   * @param track - The track added into the mixer / 指定音轨
+   * @param volume - Volume range [0, 100] / 指定音量，可设范围 [0, 100]
+   * @throws Throw an error if the track is not an audio kind MediaStreamTrack / 当输入非合法音轨时将抛出错误
    * 
    * @example
    * ```
@@ -179,11 +179,11 @@ export default class AudioTrackMixer {
   }
 
   /**
-   * Mute the track added into the mixer
+   * Mute a track. / 将某条音轨静音
    * 
-   * @param track - The track added into the mixer
-   * @returns True if mute successfully, False when failure
-   * @throws Will throw an error if the track is not an audio kind MediaStreamTrack
+   * @param track - The track added into the mixer / 指定音轨
+   * @returns True if mute successfully, False when failure / 成功时返回 true，失败时返回 false
+   * @throws Throw an error if the track is not an audio kind MediaStreamTrack / 传入的非合法音轨时将抛出错误
    * 
    * @example
    * ```
@@ -203,11 +203,11 @@ export default class AudioTrackMixer {
   }
 
   /**
-   * Unmute the track added into the mixer
+   * Unmute the track added into the mixer. / 将某条音轨取消静音
    * 
-   * @param track - The track added into the mixer
-   * @returns True if unmute successfully, False when failure
-   * @throws Will throw an error if the track is not an audio kind MediaStreamTrack
+   * @param track - The track added into the mixer / 指定音轨
+   * @returns True if unmute successfully, False when failure / 成功时返回 true, 失败时返回 false
+   * @throws Throw an error if the track is not an audio kind MediaStreamTrack / 传入的非合法音轨时将抛出错误
    * 
    * @example
    * ```
@@ -227,9 +227,9 @@ export default class AudioTrackMixer {
   }
 
   /**
-   * Get all tracks added into the mixer. (not the mixed one).
+   * Get all original tracksr (not the mixed one). / 获取所有原始音轨
    * 
-   * @returns All tracks added into the mixer
+   * @returns Return all original tracks / 返回所有原始音轨
    * @example
    * ```
    * const tracks = mixer.getTracks();
@@ -244,9 +244,9 @@ export default class AudioTrackMixer {
   }
 
   /**
-   * Get the mixed track from the mixer after adding tracks.
+   * Get the mixed track from the mixer after mixing tracks. / 获取经过合并器合并后的音轨
    * 
-   * @returns The mixed audio track
+   * @returns The mixed audio track / 合并后的音轨
    * @example
    * ```
    * const mixedTrack = mixer.getMixedTrack();
@@ -257,9 +257,9 @@ export default class AudioTrackMixer {
   }
 
   /**
-   * Get the volume of the mixed track
+   * Get the volume of the mixed track. / 获取合并后音轨的音量
    * 
-   * @returns Volume range [0, 100]
+   * @returns Volume range [0, 100] / 返回的音量范围为 [0, 100]
    * @example
    * ```
    * const volume = mixer.getMixedTrackVolume();
@@ -277,12 +277,13 @@ export default class AudioTrackMixer {
   }
 
   /**
-   * Get media stream which contains mixed audio track
+   * Get media stream which contains mixed audio track, you can play it directly. / 直接获取包含合并后音轨的媒体流，可用于直接播放
    * 
-   * @returns The media stream includes the mixed audio track, you can play it directly
+   * @returns The media stream includes the mixed audio track / 返回媒体流
    * @example
    * ```
-   * audio.srcObject = mixer.getMixedMediaStream(); // audio is an Audio object
+   * const audio = new Audio();
+   * audio.srcObject = mixer.getMixedMediaStream();
    * ```
    */
   getMixedMediaStream(): MediaStream {
@@ -290,7 +291,7 @@ export default class AudioTrackMixer {
   }
 
   /**
-   * Clear cache of the mixer and destroy it.
+   * Clear cache of the mixer and destroy it. / 销毁合并器
    *
    * @returns An promise
    * @example
@@ -312,10 +313,10 @@ export default class AudioTrackMixer {
   }
 
   /**
-   * Sometimes, you may have a source [MediaStream](https://developer.mozilla.org/zh-CN/docs/Web/API/MediaStream), this function will extract all audio tracks from the MediaStream
+   * Get all audio tracks from a [MediaStream](https://developer.mozilla.org/en-US/docs/Web/API/MediaStream). / 直接从 [媒体流](https://developer.mozilla.org/zh-CN/docs/Web/API/MediaStream) 中提取出所有音频轨道
    * 
-   * @param stream A source MediaStream
-   * @returns An Array of audio kind MediaStreamTrack
+   * @param stream A source MediaStream / 一条媒体流
+   * @returns An Array of audio kind MediaStreamTrack / 包含若干个音轨的数组
    * @example
    * ```
    * const audioTracks = AudioTrackMixer.getTracks(stream);
@@ -326,11 +327,14 @@ export default class AudioTrackMixer {
   }
 
   /**
-   * Get audio tracks from and audio element.
-   * note: audio element must has already loaded data;
+   * Get audio tracks from an audio element. / 从 audio 元素中提取出音轨
    *
-   * @param audio - An audio element (HTMLAudioElement)
-   * @returns
+   * **Note / 注意**
+   *
+   * Audio element must has already loaded data. / 提取前须确保音频数据已加载
+   *
+   * @param audio - An audio element (HTMLAudioElement). / 一个 audio 元素
+   * @returns Audio tracks / 若干音轨
    * @example
    * ```
    * const audio = new Audio(xxx.mp3);
@@ -352,7 +356,7 @@ export default class AudioTrackMixer {
 }
 
 /**
- * The version of AudioTrackMixer
+ * The version of AudioTrackMixer / 音轨合并器的版本号
  * 
  * @example
  * ```
