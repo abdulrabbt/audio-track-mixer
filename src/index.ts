@@ -88,11 +88,8 @@ export default class AudioTrackMixer {
    * mixer.addTrack(trackB);
    * ```
    *
-   * **Note / 备注**
+   * @note Because of the chain invoke, you can also use it just like the following way: / 因支持链接调用，所以你也可以像下面这样使用:
    *
-   * Because of the chain invoke, you can also use it just like the following way: / 因支持链接调用，所以你也可以像下面这样使用:
-   * 
-   * 
    * ```
    * mixer.addTrack(trackA).addTrack(trackB);
    * ```
@@ -133,9 +130,7 @@ export default class AudioTrackMixer {
    * mixer.removeTrack(trackB);
    * ```
    *
-   * **Note / 备注**
-   *
-   * Because of the chain invoke, you can also use it just like the following way: / 因支持链接调用，所以你也可以像下面这样使用:
+   * @note Because of the chain invoke, you can also use it just like the following way: / 因支持链接调用，所以你也可以像下面这样使用:
    * 
    * ```
    * mixer.removeTrack(trackA).removeTrack(trackB);
@@ -329,10 +324,6 @@ export default class AudioTrackMixer {
   /**
    * Get audio tracks from an audio element. / 从 audio 元素中提取出音轨
    *
-   * **Note / 注意**
-   *
-   * Audio element must has already loaded data. / 提取前须确保音频数据已加载
-   *
    * @param audio - An audio element (HTMLAudioElement). / 一个 audio 元素
    * @returns Audio tracks / 若干音轨
    * @example
@@ -342,6 +333,7 @@ export default class AudioTrackMixer {
    *   const audioTracks = AudioTrackMixer.getTracksFromAudioElement(audio);
    * });
    * ```
+   * @note Audio element must has already loaded data. / 提取前须确保音频数据已加载
    */
   static getTracksFromAudioElement(audio: HTMLAudioElement): MediaStreamTrack[] {
     if (Audio.prototype.captureStream) {
