@@ -1,4 +1,4 @@
-import { isOldEdge, isSafari } from "./utils/agent";
+import { getBrowserInfo } from "./utils/agent";
 
 /**
  * @ignore
@@ -322,28 +322,34 @@ export default class AudioTrackMixer {
   }
 
   /**
-   * Get audio tracks from an audio element. / 从 audio 元素中提取出音轨
+   * Get MediaStream from HTMLMediaElement. / 从媒体元素中获取媒体流
    *
-   * @param audio - An audio element (HTMLAudioElement). / 一个 audio 元素
-   * @returns Audio tracks / 若干音轨
+   * @param element - A HTMLMediaElement，such as audio or video element. / 一个媒体元素，如 audio 或 video 元素
+   * @returns MediaStream / 媒体流
    * @example
    * ```
    * const audio = new Audio(xxx.mp3);
    * audio.addEventListener('loadeddata', () => {
-   *   const audioTracks = AudioTrackMixer.getTracksFromAudioElement(audio);
+   *   const stream = AudioTrackMixer.getMediaStreamFromElement(audio);
+   *   if (stream) {
+   *     // You can get audio or video tracks after loadeddata, otherwise it will return blank. // 请在加载数据后再获取音视频轨道，否则将获取空
+   *     const tracks = stream.getTracks();
+   *   }
    * });
    * ```
-   * @note Audio element must has already loaded data. / 提取前须确保音频数据已加载
+   * @note Some browser may not support this API, such as Safari. / 部分浏览器不支持该 API，如 Safari
+   * @note Media element must has already loaded data if you want get more information, such as AudioTracks. / 如果想获取更多的信息，请在提取前须确保媒体元数据已加载
+   * @note In Firefox browser, the original sounds may disappear, you play the sounds with a new MediaElement or WebAudio API. / 在火狐浏览器中，调用此 API 之后，原声音会消失，若需要继续播放音频，请创建一个新的媒体元素或使用 WebAudio API 来播放
    */
-  static getTracksFromAudioElement(audio: HTMLAudioElement): MediaStreamTrack[] {
+  static getMediaStreamFromElement(el: HTMLMediaElement): MediaStream | undefined {
     if (Audio.prototype.captureStream) {
-      return (audio as any).captureStream().getAudioTracks();
+      return (el as any).captureStream();
     } else if (Audio.prototype.mozCaptureStream) {
-      return (audio as any).mozCaptureStream().getAudioTracks()[0];
-    } else if (isSafari() || isOldEdge()) {
-      return (audio as any).audioTracks;
+      return (el as any).mozCaptureStream();
+    } else  {
+      const browserInfo = getBrowserInfo();
+      console.warn(`${browserInfo.name} - ${browserInfo.version} is not support this API`);
     }
-    return [];
   }
 }
 
